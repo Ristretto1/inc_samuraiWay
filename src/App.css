@@ -17,18 +17,7 @@ img {
 
 }
 
-.header {
-    grid-area: header;
-}
 
-.header img {
-    width: 20px;
-}
 
-.nav {
-    grid-area: nav;
-}
 
-.content {
-    grid-area: content;
-}
+
