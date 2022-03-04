@@ -17,6 +17,11 @@ img {
 
 }
 
+.app-wrapper-content {
+    grid-area: content;
+    background-color: cornflowerblue;
+}
+
 
 
 
