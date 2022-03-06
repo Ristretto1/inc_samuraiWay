@@ -54,14 +54,14 @@ let state: stateType = {
             {id: 1, message: 'Hi'},
             {id: 2, message: 'HIHI'},
             {id: 3, message: 'Yo'},
-            {id: 3, message: 'YoYo'},
+            {id: 4, message: 'YoYo'},
         ],
     },
     profilePage: {
         myPosts: [
             {id: 1, message: 'Hi, how are you?', likes: 15},
             {id: 2, message: 'It is your first post', likes: 20},
-            {id: 2, message: 'It is your second post', likes: 30}
+            {id: 3, message: 'It is your second post', likes: 30}
         ]
     },
     sidebar: {
