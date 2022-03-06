@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./Message.module.css";
 
-type MessagePropsType ={
+type MessagePropsType = {
     message: string,
 }
 
@@ -10,7 +10,6 @@ const Message = (props: MessagePropsType) => {
         <div className={s.message}>{props.message}</div>
     )
 }
-
 
 
 export default Message;

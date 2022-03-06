@@ -1,5 +1,6 @@
 import React from "react";
 import s from './ProfileInfo.module.css';
+
 type ProfileInfo = {}
 
 const ProfileInfo = (props: ProfileInfo) => {

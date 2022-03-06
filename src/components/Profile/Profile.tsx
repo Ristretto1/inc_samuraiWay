@@ -8,7 +8,7 @@ type ProfilePropsType = {
     state: profilePageType,
 }
 
-const Profile = (props:ProfilePropsType) => {
+const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>

@@ -7,7 +7,7 @@ type myPostsPropsType = {
     myPosts: Array<myPostsType>
 }
 
-const MyPosts = (props:myPostsPropsType) => {
+const MyPosts = (props: myPostsPropsType) => {
 
     let posts = props.myPosts.map((p) => {
         return <Post key={p.id} likes={p.likes} message={p.message}/>
