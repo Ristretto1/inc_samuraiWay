@@ -12,7 +12,7 @@ export type myPostsType = {
     likes: number
 }
 
-export type messagesPageType = {
+export type dialogsPageType = {
         dialogs: Array<dialogsType>,
     messages: Array<messagesType>,
 }
@@ -22,12 +22,12 @@ export type profilePageType = {
 }
 
 export type stateType = {
-    messagesPage: messagesPageType,
+    dialogsPage: dialogsPageType,
     profilePage: profilePageType
 }
 
 let state: stateType = {
-    messagesPage: {
+    dialogsPage: {
         dialogs: [
             {id: 1, name: 'Kirill'},
             {id: 2, name: 'Dima'},
