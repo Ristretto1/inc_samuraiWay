@@ -14,12 +14,12 @@ type AppPropsType = {
     state: stateType
 }
 
-function App(props: AppPropsType) {
+const App: React.FC<AppPropsType> = (props) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar state = {props.state.sidebar}/>
+                <Navbar state={props.state.sidebar}/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() => <Profile state={props.state.profilePage}/>}/>
                     <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>

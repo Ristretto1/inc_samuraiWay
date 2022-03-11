@@ -8,7 +8,7 @@ type NavbarPropsType = {
     state: sidebarType,
 }
 
-const Navbar = (props: NavbarPropsType) => {
+const Navbar: React.FC<NavbarPropsType> = (props) => {
     return (
         <nav className={s.nav}>
             <div className={s.item}><NavLink to='/profile' activeClassName={s.active}>Profile</NavLink></div>

@@ -1,7 +1,9 @@
 import React from 'react';
 import s from './Header.module.css';
 
-const Header = () => {
+type HeaderPropsType = {}
+
+const Header: React.FC<HeaderPropsType> = (props) => {
     return (
         <header className={s.header}>
             <img

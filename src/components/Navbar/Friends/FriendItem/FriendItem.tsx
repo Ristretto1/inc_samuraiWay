@@ -8,7 +8,7 @@ type FriendItemPropsType = {
     name: string
 }
 
-const FriendItem = (props: FriendItemPropsType) => {
+const FriendItem: React.FC<FriendItemPropsType> = (props) => {
     return (
         <li className={s.item}>
             <img src={props.img}/>

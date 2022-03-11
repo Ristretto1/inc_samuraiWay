@@ -8,7 +8,7 @@ type DialogsPropsType = {
     state: dialogsPageType
 }
 
-const Dialogs = (props: DialogsPropsType) => {
+const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
 
     let dialogsElements = props.state.dialogs.map((d) => {

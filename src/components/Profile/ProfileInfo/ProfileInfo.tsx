@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 
 type ProfileInfo = {}
 
-const ProfileInfo = (props: ProfileInfo) => {
+const ProfileInfo: React.FC<ProfileInfo> = (props) => {
     return (
         <div>
             <div>

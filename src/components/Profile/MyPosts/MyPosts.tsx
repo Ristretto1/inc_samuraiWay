@@ -7,11 +7,14 @@ type myPostsPropsType = {
     myPosts: Array<myPostsType>
 }
 
-const MyPosts = (props: myPostsPropsType) => {
+const MyPosts: React.FC<myPostsPropsType> = (props) => {
 
-    let posts = props.myPosts.map((p) => {
+    const posts = props.myPosts.map((p) => {
         return <Post key={p.id} likes={p.likes} message={p.message}/>
     })
+    let addPost = () => {
+    }
+
 
     return (
         <div className={s.postsBlock}>
@@ -22,7 +25,7 @@ const MyPosts = (props: myPostsPropsType) => {
                     <textarea></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>

@@ -1,3 +1,5 @@
+import {renderedEntireTree} from "../render";
+
 export type dialogsType = {
     id: number,
     name: string
@@ -84,6 +86,16 @@ let state: stateType = {
 
         ]
     }
+}
+
+export const addPost = (postMessage: string) => {
+    const newPost = {
+        id: 5,
+        message: postMessage,
+        likes: 0
+    }
+    state.profilePage.myPosts.push(newPost);
+    renderedEntireTree(state)
 }
 
 export default state;

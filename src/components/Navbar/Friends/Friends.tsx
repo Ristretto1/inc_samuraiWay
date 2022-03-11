@@ -8,7 +8,7 @@ type FriendsPropsType = {
     friends: Array<friendsType>
 }
 
-const Friends = (props: FriendsPropsType) => {
+const Friends: React.FC<FriendsPropsType> = (props) => {
 
     let friendsList = props.friends.map((f) => {
         return <FriendItem key={f.id} img={f.img} name={f.name}/>
