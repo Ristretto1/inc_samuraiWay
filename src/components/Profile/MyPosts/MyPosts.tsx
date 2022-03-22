@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {createRef} from 'react';
 import s from './MyPosts.module.css';
-import Post from "./Post/Post";
-import {myPostsType} from "../../../redux/state";
+import Post from './Post/Post';
+import {myPostsType} from '../../../redux/state';
 
 type myPostsPropsType = {
     myPosts: Array<myPostsType>
@@ -12,7 +12,12 @@ const MyPosts: React.FC<myPostsPropsType> = (props) => {
     const posts = props.myPosts.map((p) => {
         return <Post key={p.id} likes={p.likes} message={p.message}/>
     })
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
+
     let addPost = () => {
+        let text = newPostElement.current?.value
+        alert(text)
     }
 
 
@@ -22,7 +27,7 @@ const MyPosts: React.FC<myPostsPropsType> = (props) => {
 
             <div>
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
