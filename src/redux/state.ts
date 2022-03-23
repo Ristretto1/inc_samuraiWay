@@ -27,6 +27,7 @@ export type dialogsPageType = {
 }
 export type profilePageType = {
     myPosts: Array<myPostsType>,
+    newPostText:string
 }
 export type sidebarType = {
     friends: Array<friendsType>
@@ -64,7 +65,8 @@ let state: stateType = {
             {id: 1, message: 'Hi, how are you?', likes: 15},
             {id: 2, message: 'It is your first post', likes: 20},
             {id: 3, message: 'It is your second post', likes: 30}
-        ]
+        ],
+        newPostText: ''
     },
     sidebar: {
         friends: [
@@ -88,13 +90,19 @@ let state: stateType = {
     }
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     const newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likes: 0
     }
     state.profilePage.myPosts.push(newPost);
+    state.profilePage.newPostText = ''
+    renderedEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
     renderedEntireTree(state)
 }
 

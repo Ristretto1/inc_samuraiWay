@@ -1,11 +1,13 @@
-import React, {createRef} from 'react';
+import React, {ChangeEvent, createRef} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {myPostsType} from '../../../redux/state';
 
 type myPostsPropsType = {
     myPosts: Array<myPostsType>
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (text: string) => void
 }
 
 const MyPosts: React.FC<myPostsPropsType> = (props) => {
@@ -17,13 +19,13 @@ const MyPosts: React.FC<myPostsPropsType> = (props) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     let addPost = () => {
-        if (newPostElement.current) {
-            let text = newPostElement.current.value.trim()
-            if (text) props.addPost(text)
-            newPostElement.current.value = ''
-        }
+            props.addPost()
     }
 
+    const onPostChange = () => {
+        const text = newPostElement.current?.value
+        if (text) props.updateNewPostText(text)
+    }
 
     return (
         <div className={s.postsBlock}>
@@ -31,7 +33,11 @@ const MyPosts: React.FC<myPostsPropsType> = (props) => {
 
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea
+                        ref={newPostElement}
+                        value={props.newPostText}
+                        onChange={onPostChange}
+                    />
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
