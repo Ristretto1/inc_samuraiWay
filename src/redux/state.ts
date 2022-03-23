@@ -91,7 +91,7 @@ let state: stateType = {
 }
 
 export const addPost = () => {
-    const newPost = {
+    const newPost: myPostsType = {
         id: 5,
         message: state.profilePage.newPostText,
         likes: 0

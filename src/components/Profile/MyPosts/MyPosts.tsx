@@ -22,9 +22,8 @@ const MyPosts: React.FC<myPostsPropsType> = (props) => {
             props.addPost()
     }
 
-    const onPostChange = () => {
-        const text = newPostElement.current?.value
-        if (text) props.updateNewPostText(text)
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
     }
 
     return (
@@ -34,7 +33,6 @@ const MyPosts: React.FC<myPostsPropsType> = (props) => {
             <div>
                 <div>
                     <textarea
-                        ref={newPostElement}
                         value={props.newPostText}
                         onChange={onPostChange}
                     />
