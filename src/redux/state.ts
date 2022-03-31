@@ -1,5 +1,3 @@
-import {renderedEntireTree} from "../render";
-
 export type dialogsType = {
     id: number,
     name: string
@@ -43,7 +41,7 @@ export type stateType = {
 }
 //-------------------------------------------//
 
-
+let renderedEntireTree = (state: stateType) => {}
 let state: stateType = {
     dialogsPage: {
         dialogs: [
@@ -104,6 +102,10 @@ export const addPost = () => {
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     renderedEntireTree(state)
+}
+
+export const subscribe = (observer: (state: stateType) => void) => {
+    renderedEntireTree = observer
 }
 
 export default state;
