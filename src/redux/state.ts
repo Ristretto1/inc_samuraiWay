@@ -40,6 +40,9 @@ export type StateType = {
 
 }
 //-------------------------------------------//
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+
 
 let store = {
     _state: {
@@ -97,8 +100,8 @@ let store = {
         this._renderedEntireTree = observer
     },
 
-    dispatch( action: any) {
-        if (action.type === 'ADD-POST') {
+    dispatch(action: any) {
+        if (action.type === ADD_POST) {
             const newPost: myPostsType = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -107,7 +110,7 @@ let store = {
             this._state.profilePage.myPosts.push(newPost);
             this._state.profilePage.newPostText = ''
             this._renderedEntireTree(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._renderedEntireTree(this._state)
         }
@@ -115,6 +118,13 @@ let store = {
 
 }
 
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const updateNewPostActionCreator = (text: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        newText: text
+    }
+}
 
 //-------------------------------------------//
 
