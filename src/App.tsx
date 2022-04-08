@@ -8,10 +8,10 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {stateType} from "./redux/state";
+import {StateType} from "./redux/state";
 
 type AppPropsType = {
-    state: stateType
+    state: StateType
     addPost: () => void
     updateNewPostText: (text: string) => void
 }
