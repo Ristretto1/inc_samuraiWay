@@ -93,23 +93,26 @@ let store = {
     getState() {
         return this._state
     },
-    addPost() {
-        const newPost: myPostsType = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likes: 0
-        }
-        this._state.profilePage.myPosts.push(newPost);
-        this._state.profilePage.newPostText = ''
-        this._renderedEntireTree(this._state)
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._renderedEntireTree(this._state)
-    },
     subscribe(observer: (state: StateType) => void) {
         this._renderedEntireTree = observer
+    },
+
+    dispatch( action: any) {
+        if (action.type === 'ADD-POST') {
+            const newPost: myPostsType = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likes: 0
+            }
+            this._state.profilePage.myPosts.push(newPost);
+            this._state.profilePage.newPostText = ''
+            this._renderedEntireTree(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._renderedEntireTree(this._state)
+        }
     }
+
 }
 
 

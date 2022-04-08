@@ -6,11 +6,9 @@ import store, {StateType} from './redux/state';
 import './index.css';
 
 
-
-
 const renderedEntireTree = (state: StateType) => {
     ReactDOM.render(
-        <App state={state} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)}/>, document.getElementById('root'))
+        <App state={state} dispatch={store.dispatch.bind(store)}/>, document.getElementById('root'))
 
 }
 
