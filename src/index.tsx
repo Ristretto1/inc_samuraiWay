@@ -8,7 +8,7 @@ import './index.css';
 
 const renderedEntireTree = (state: StateType) => {
     ReactDOM.render(
-        <App state={state} dispatch={store.dispatch.bind(store)}/>, document.getElementById('root'))
+        <App store={store} dispatch={store.dispatch.bind(store)}/>, document.getElementById('root'))
 
 }
 

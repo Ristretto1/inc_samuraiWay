@@ -1,21 +1,22 @@
-import {profileReducer} from './profile-reducer';
-import {dialogsReducer} from './dialogs-reducer';
+import {addPostActionCreator, profileReducer, updateNewPostActionCreator} from './profile-reducer';
+import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
+import {access} from 'fs';
 
-export type dialogsType = {
+export type DialogsType = {
     id: number,
     name: string
 }
-export type messagesType = {
+export type MessagesType = {
     id: number,
     message: string
 }
-export type myPostsType = {
+export type MyPostsType = {
     id: number,
     message: string,
     likes: number
 }
-export type friendsType = {
+export type FriendsType = {
     id: number,
     img: string,
     name: string
@@ -23,30 +24,44 @@ export type friendsType = {
 //-------------------------------------------//
 
 
-export type dialogsPageType = {
-    dialogs: Array<dialogsType>,
-    messages: Array<messagesType>,
+export type DialogsPageType = {
+    dialogs: Array<DialogsType>,
+    messages: Array<MessagesType>,
     newMessageBody: string
 }
-export type profilePageType = {
-    myPosts: Array<myPostsType>,
+export type ProfilePageType = {
+    myPosts: Array<MyPostsType>,
     newPostText: string
 }
-export type sidebarType = {
-    friends: Array<friendsType>
+export type SidebarType = {
+    friends: Array<FriendsType>
 }
 //-------------------------------------------//
 
 
 export type StateType = {
-    dialogsPage: dialogsPageType,
-    profilePage: profilePageType,
-    sidebar: sidebarType,
+    dialogsPage: DialogsPageType,
+    profilePage: ProfilePageType,
+    sidebar: SidebarType,
 
 }
+
+export type StoreType = {
+    _state: StateType
+    _renderedEntireTree: (state:StateType) => void
+    getState: () => StateType
+    subscribe:(observer: (state: StateType) => void) => void
+    dispatch: (action: AddPostActionType|SendMessageActionType|UpdateNewPostActionType|updateNewMessageBodyActionType) => void
+
+}
+
+export type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export type SendMessageActionType = ReturnType<typeof sendMessageCreator>
+export type UpdateNewPostActionType = ReturnType<typeof updateNewPostActionCreator>
+export type updateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyCreator>
 //-------------------------------------------//
 
-let store = {
+let store: StoreType = {
     _state: {
         dialogsPage: {
             dialogs: [
@@ -99,8 +114,8 @@ let store = {
     getState() {
         return this._state
     },
-    subscribe(observer: (state: StateType) => void) {
-        this._renderedEntireTree = observer
+    subscribe(callback) {
+        this._renderedEntireTree = callback
     },
 
     dispatch(action: any) {
