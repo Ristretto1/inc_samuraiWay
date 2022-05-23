@@ -1,4 +1,4 @@
-import {DialogsPageType, MessagesType, MyPostsType, StateType} from './state';
+import {DialogsPageType, MessagesType, MyPostsType, StateType} from './store';
 
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
