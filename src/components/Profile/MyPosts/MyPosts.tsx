@@ -6,8 +6,9 @@ import {addPostActionCreator, updateNewPostActionCreator} from '../../../redux/p
 
 type myPostsPropsType = {
     myPosts: Array<MyPostsType>
-    dispatch: any
     newPostText: string
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
 
 
@@ -18,15 +19,14 @@ const MyPosts: React.FC<myPostsPropsType> = (props) => {
         return <Post key={p.id} likes={p.likes} message={p.message}/>
     })
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    let addPost = () => {
-        props.dispatch(addPostActionCreator())
+    let onAddPost = () => {
+        props.addPost()
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const text = e.currentTarget.value
-        props.dispatch(updateNewPostActionCreator(text))
+        props.updateNewPostText(text)
     }
 
     return (
@@ -40,7 +40,7 @@ const MyPosts: React.FC<myPostsPropsType> = (props) => {
                     />
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
