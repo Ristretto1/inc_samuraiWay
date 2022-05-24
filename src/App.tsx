@@ -11,7 +11,7 @@ import Settings from './components/Settings/Settings';
 import {StateType, StoreType} from './redux/store';
 
 type AppPropsType = {
-    store: StoreType
+    store: any
     dispatch: any
 }
 

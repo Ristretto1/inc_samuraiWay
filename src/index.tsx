@@ -15,4 +15,4 @@ const renderedEntireTree = (state: StateType) => {
 
 renderedEntireTree(store.getState());
 
-store.subscribe(renderedEntireTree)
+store.subscribe(()=>renderedEntireTree(store.getState()))
