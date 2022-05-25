@@ -13,14 +13,12 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 type AppPropsType = {}
 
 const App: React.FC<AppPropsType> = (props) => {
-    const state = props.store.getState()
-
 
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar state={state.sidebar}/>
+                <Navbar/>
                 <div className="app-wrapper-content">
                     <Route path="/profile" render={() => <Profile/>}/>
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/>

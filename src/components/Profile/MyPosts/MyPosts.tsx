@@ -1,21 +1,19 @@
 import React, {ChangeEvent, createRef} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {MyPostsType} from '../../../redux/store';
+import {MyPostsType, ProfilePageType} from '../../../redux/store';
 import {addPostActionCreator, updateNewPostActionCreator} from '../../../redux/profile-reducer';
 
 type myPostsPropsType = {
-    myPosts: Array<MyPostsType>
-    newPostText: string
+    profilePage: ProfilePageType
     updateNewPostText: (text: string) => void
     addPost: () => void
 }
 
 
-
 const MyPosts: React.FC<myPostsPropsType> = (props) => {
 
-    const posts = props.myPosts.map((p) => {
+    const posts = props.profilePage.myPosts.map((p) => {
         return <Post key={p.id} likes={p.likes} message={p.message}/>
     })
 
@@ -35,7 +33,7 @@ const MyPosts: React.FC<myPostsPropsType> = (props) => {
             <div>
                 <div>
                     <textarea
-                        value={props.newPostText}
+                        value={props.profilePage.newPostText}
                         onChange={onPostChange}
                     />
                 </div>

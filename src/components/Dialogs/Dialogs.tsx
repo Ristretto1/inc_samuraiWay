@@ -9,18 +9,17 @@ type DialogsPropsType = {
     onNewMessageChange: (body: string) => void
     onSendMessageClick: () => void
     newMessageBody: string
-    dialogs: Array<DialogsType>
-    messages: Array<MessagesType>
+    dialogsPage: DialogsPageType
 }
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
 
-    const dialogsElements = props.dialogs.map((d) => {
+    const dialogsElements = props.dialogsPage.dialogs.map((d) => {
         return <DialogItem key={d.id} id={d.id} name={d.name}/>
     })
 
-    const messagesElements = props.messages.map((m) => {
+    const messagesElements = props.dialogsPage.messages.map((m) => {
         return <Message message={m.message}/>
     })
 
