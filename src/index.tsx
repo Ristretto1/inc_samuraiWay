@@ -5,12 +5,14 @@ import App from './App';
 import {store} from './redux/redux-store';
 import {StateType} from './redux/store';
 import './index.css';
+import StoreContext from './StoreContext';
 
 
 const renderedEntireTree = (state: StateType) => {
     ReactDOM.render(
-        <App store={store} dispatch={store.dispatch.bind(store)}/>, document.getElementById('root'))
-
+        <StoreContext.Provider value={store}>
+            <App/>
+        </StoreContext.Provider>, document.getElementById('root'))
 }
 
 renderedEntireTree(store.getState());

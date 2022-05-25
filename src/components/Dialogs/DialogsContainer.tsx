@@ -4,35 +4,32 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import {DialogsPageType} from '../../redux/store';
 import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
+import Dialogs from './Dialogs';
 
 type DialogsPropsType = {
-store: any
+    store: any
 }
 
-const Dialogs: React.FC<DialogsPropsType> = (props) => {
-
-
-    const dialogsElements = props.state.dialogs.map((d) => {
-        return <DialogItem key={d.id} id={d.id} name={d.name}/>
-    })
-
-    const messagesElements = props.state.messages.map((m) => {
-        return <Message message={m.message}/>
-    })
-    const newMessageBody = props.state.newMessageBody
+const DialogsContainer: React.FC<DialogsPropsType> = (props) => {
+    const newMessageBody = props.store.getState().newMessageBody
 
     const onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator())
+        props.store.dispatch(sendMessageCreator())
     }
 
-    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const body = e.currentTarget.value
-        props.dispatch(updateNewMessageBodyCreator(body))
+    const onNewMessageChange = (body: string) => {
+        props.store.dispatch(updateNewMessageBodyCreator(body))
     }
 
     return (
-        <Dialogs state={} dispatch={}/>
+        <Dialogs
+            onNewMessageChange={onNewMessageChange}
+            onSendMessageClick={onSendMessageClick}
+            newMessageBody={newMessageBody}
+            dialogs={props.store.getState().dialogs}
+            messages={props.store.getState().messages}
+        />
     );
 };
 
-export default Dialogs;
+export default DialogsContainer;

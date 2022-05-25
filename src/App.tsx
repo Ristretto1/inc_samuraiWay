@@ -8,12 +8,10 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
-type AppPropsType = {
-    store: any
-    dispatch: any
-}
+type AppPropsType = {}
 
 const App: React.FC<AppPropsType> = (props) => {
     const state = props.store.getState()
@@ -25,14 +23,8 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Header/>
                 <Navbar state={state.sidebar}/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile
-                        store={props.store}
-                    />}/>
-                    <Route path="/dialogs" render={() => <Dialogs
-                        store={props.store}
-                        state={state.dialogsPage}
-                        dispatch={props.dispatch}
-                    />}/>
+                    <Route path="/profile" render={() => <Profile/>}/>
+                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
