@@ -1,10 +1,13 @@
 export type UserType = {
-    id: number,
+    id: number
+    name: string
+    status: string
+    photos: {
+        small: string
+        large: string
+    }
     followed: boolean
-    fullName: string,
-    status: string,
-    photoURL: string,
-    location: { city: string, country: string }
+    //location: { city: string, country: string }
 }
 //--------------------------------------------
 type usersReducerActionType = followACType | unfollowACType | setUsersACType
