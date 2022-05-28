@@ -1,7 +1,4 @@
-import {MessagesType, MyPostsType, ProfilePageType, StateType} from './store';
-
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+import {ProfilePageType} from './store';
 
 const initialState = {
     myPosts: [
@@ -12,26 +9,34 @@ const initialState = {
     newPostText: ''
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: any) => {
+//------------------------
+type profileReducerActionType = addPostACType | updateNewPostACType
+//------------------------
+type addPostACType = ReturnType<typeof addPostAC>
+type updateNewPostACType = ReturnType<typeof updateNewPostAC>
+//------------------------
+export const addPostAC = () => ({type: 'ADD-POST'} as const)
+export const updateNewPostAC = (text: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: text
+    } as const
+}
+//------------------------
+
+export const profileReducer = (state: ProfilePageType = initialState, action: profileReducerActionType) => {
     switch (action.type) {
-        case ADD_POST: {
+        case 'ADD-POST': {
             return {
                 ...state,
                 myPosts: [...state.myPosts, {id: 5, message: state.newPostText, likes: 0}],
                 newPostText: ''
             }
         }
-        case UPDATE_NEW_POST_TEXT: {
+        case 'UPDATE-NEW-POST-TEXT': {
             return {...state, newPostText: action.newText}
         }
         default:
             return state
     }
-}
-export const addPostActionCreator = () => ({type: ADD_POST} as const)
-export const updateNewPostActionCreator = (text: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    } as const
 }

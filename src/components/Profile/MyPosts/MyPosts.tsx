@@ -2,7 +2,7 @@ import React, {ChangeEvent, createRef} from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import {MyPostsType, ProfilePageType} from '../../../redux/store';
-import {addPostActionCreator, updateNewPostActionCreator} from '../../../redux/profile-reducer';
+import {addPostAC, updateNewPostAC} from '../../../redux/profile-reducer';
 
 type myPostsPropsType = {
     profilePage: ProfilePageType
