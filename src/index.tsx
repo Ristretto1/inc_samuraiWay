@@ -7,15 +7,7 @@ import {StateType} from './redux/store';
 import './index.css';
 import {Provider} from 'react-redux';
 
-
-
-const renderedEntireTree = (state: StateType) => {
     ReactDOM.render(
         <Provider store={store}>
             <App/>
         </Provider>, document.getElementById('root'))
-}
-
-renderedEntireTree(store.getState());
-
-store.subscribe(()=>renderedEntireTree(store.getState()))
