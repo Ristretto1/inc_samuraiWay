@@ -1,3 +1,5 @@
+import {UserType} from './users-reducer';
+
 export type DialogsType = {
     id: number,
     name: string
@@ -38,7 +40,7 @@ export type StateType = {
     dialogsPage: DialogsPageType,
     profilePage: ProfilePageType,
     sidebar: SidebarType,
-
+    usersPage: {users: Array<UserType>}
 }
 
 // export type StoreType = {
