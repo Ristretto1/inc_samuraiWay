@@ -3,8 +3,8 @@ export type UserType = {
     name: string
     status: string
     photos: {
-        small: string
-        large: string
+        small?: string
+        large?: string
     }
     followed: boolean
     //location: { city: string, country: string }
