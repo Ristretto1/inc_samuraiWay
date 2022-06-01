@@ -40,7 +40,11 @@ export type StateType = {
     dialogsPage: DialogsPageType,
     profilePage: ProfilePageType,
     sidebar: SidebarType,
-    usersPage: {users: Array<UserType>}
+    usersPage: {
+        currentPage: number;
+        totalUsersCount: number;
+        pageSize: number;
+        users: Array<UserType>}
 }
 
 // export type StoreType = {
