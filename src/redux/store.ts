@@ -44,7 +44,8 @@ export type StateType = {
         currentPage: number;
         totalUsersCount: number;
         pageSize: number;
-        users: Array<UserType>}
+        users: Array<UserType>
+    }
 }
 
 // export type StoreType = {
