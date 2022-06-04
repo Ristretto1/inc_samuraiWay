@@ -41,6 +41,7 @@ export type StateType = {
     profilePage: ProfilePageType,
     sidebar: SidebarType,
     usersPage: {
+        isFetching: boolean;
         currentPage: number;
         totalUsersCount: number;
         pageSize: number;
