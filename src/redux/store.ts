@@ -18,6 +18,28 @@ export type FriendsType = {
     img: string,
     name: string
 }
+
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: {
+        small: string
+        large: string
+    }
+
+}
 //-------------------------------------------//
 
 
@@ -27,6 +49,7 @@ export type DialogsPageType = {
     newMessageBody: string
 }
 export type ProfilePageType = {
+    profile: ProfileType | null;
     myPosts: Array<MyPostsType>,
     newPostText: string
 }
