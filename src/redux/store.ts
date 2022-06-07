@@ -56,10 +56,19 @@ export type ProfilePageType = {
 export type SidebarType = {
     friends: Array<FriendsType>
 }
+
+export type AuthType = {
+    userId: number,
+    email: string,
+    login: string,
+    isAuth: boolean
+
+}
 //-------------------------------------------//
 
 
 export type StateType = {
+    auth: AuthType;
     dialogsPage: DialogsPageType,
     profilePage: ProfilePageType,
     sidebar: SidebarType,
