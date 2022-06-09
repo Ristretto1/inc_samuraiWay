@@ -57,12 +57,14 @@ export type SidebarType = {
     friends: Array<FriendsType>
 }
 
-export type AuthType = {
+export type AuthDataType = {
     userId: number,
     email: string,
     login: string,
-    isAuth: boolean
+}
 
+export type AuthType = AuthDataType & {
+    isAuth: boolean
 }
 //-------------------------------------------//
 
