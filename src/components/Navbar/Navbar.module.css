@@ -1,14 +1,19 @@
 .nav {
-    grid-area: nav;
-    background-color: burlywood;
-    padding: 20px;
+    grid-area: n;
+    background-color: green;
+}
+.items {
+    list-style-type: none;
+}
+.item {
+
+}
+.item a{
+    text-decoration: none;
+    color: white;
 }
 
-.item a {
-    color: white;
-    text-decoration: none;
-}
 
 .item a.active {
-    color: gold;
+    color: crimson;
 }

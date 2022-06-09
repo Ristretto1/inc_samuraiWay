@@ -1,20 +1,19 @@
-import {createStore, combineReducers} from 'redux'
-import {profileReducer} from './profile-reducer';
-import {dialogsReducer} from './dialogs-reducer';
-import {sidebarReducer} from './sidebar-reducer';
-import {usersReducer} from './users-reducer';
-import {authReducer} from './auth-reducer';
-import {strict} from 'assert';
+import {combineReducers, createStore} from "redux";
+import profileReducer from "./profileReducer";
+import dialogReducer from "./dialogsReducer";
+import usersReducer from "./usersReducer";
+import autReducer from "./authReducer";
 
-let reducers = combineReducers({
-    profilePage: profileReducer,
-    dialogsPage: dialogsReducer,
-    sidebar: sidebarReducer,
-    usersPage: usersReducer,
-    auth: authReducer
+
+export const rootReducer = combineReducers({
+    auth: autReducer,
+    profile: profileReducer,
+    dialogs: dialogReducer,
+    users: usersReducer
 })
 
-export let store = createStore(reducers)
+export type AppStateRootType = ReturnType<typeof rootReducer>
 
-// @ts-ignore
-window.store = store;
+export const store = createStore(rootReducer)
+export type StoreAppType = typeof store
+

@@ -1,19 +1,16 @@
-import React from 'react';
-import ProfileInfo from './ProfileInfo/ProfileInfo';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
-import {ProfileType} from '../../redux/store';
+import React from "react";
+import s from "./Profile.module.css";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
-type ProfilePropsType = {
-    profile: ProfileType
-}
 
-const Profile: React.FC<ProfilePropsType> = (props) => {
+
+
+export const Profile = (props:any) => {
     return (
-        <div>
+        <div className={s.content}>
             <ProfileInfo profile={props.profile}/>
-            <MyPostsContainer/>
+            <MyPostsContainer />
         </div>
-    );
-};
-
-export default Profile;
+    )
+}

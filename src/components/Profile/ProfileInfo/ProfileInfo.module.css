@@ -1,3 +1,6 @@
-.descBlock {
+.main__image img{
+    max-width: 100%;
+}
+.description__block{
     padding: 10px;
 }
