@@ -1,3 +1,6 @@
+import {headerAPI, usersAPI} from '../api/api';
+import {toggleIsFollowingProgress, unfollowSuccess} from './usersReducer';
+
 export type ActionsType = SetUserDataActionType
 
 
@@ -40,6 +43,17 @@ const autReducer = (state: AutInitialStateType = initialState, action: ActionsTy
 
         default:
             return state;
+    }
+}
+
+export const isAuthDispatch = () => {
+    return (dispatch: any) => {
+        headerAPI.isAuthDispatch()
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setAuthUserData(response.data.data))
+                }
+            })
     }
 }
 
