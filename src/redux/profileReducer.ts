@@ -1,6 +1,8 @@
 import {ChangeNewMessageActionType, SendMessageActionType} from "./dialogsReducer";
 import {strict} from "assert";
 import {ProfileType} from "./state";
+import {headerAPI, profileAPI} from '../api/api';
+import {setAuthUserData} from './authReducer';
 
 /*export type ProfilePageType = {
     posts: PostDataType[]
@@ -83,13 +85,20 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
             return {
                 ...state,
                 profile: action.profile
-            };
+            }; 
         default:
             return state;
     }
 }
 
-
+export const getProfile = (userId: string) => {
+    return (dispatch: any) => {
+        profileAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            });
+    }
+}
 
 
 

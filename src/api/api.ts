@@ -26,3 +26,9 @@ export const headerAPI = {
         return instance.get(`auth/me`)
     }
 }
+
+export const profileAPI = {
+    getProfile(userId: string) {
+        return instance.get(`profile/` + userId)
+    }
+}
