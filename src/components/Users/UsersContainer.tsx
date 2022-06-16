@@ -11,6 +11,9 @@ import {
 import {AppStateRootType} from '../../redux/redux-store';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
+import {compose} from 'redux';
+import {withAuthRedirectComponent} from '../../hoc/withAuthRedirect';
+import {Dialogs} from '../Dialogs/Dialogs';
 
 
 type MapStateToPropsType = {
@@ -31,7 +34,7 @@ type MapDispatchToProps = {
 
 export type UsersPropsType = MapStateToPropsType & MapDispatchToProps
 
-class UsersContainer extends React.Component<UsersPropsType> {
+class UsersAPIContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
@@ -78,10 +81,15 @@ const mapStateToProps = (state: AppStateRootType): MapStateToPropsType => {
 }
 
 
-export default connect(mapStateToProps, {
-    follow: follow,
-    unfollow: unfollow,
-    setCurrentPage,
-    toggleIsFollowingProgress,
-    getUsers
-})(UsersContainer);
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+         follow,
+        unfollow,
+        setCurrentPage,
+        toggleIsFollowingProgress,
+        getUsers
+    }),
+    withAuthRedirectComponent
+)(UsersAPIContainer)
+
