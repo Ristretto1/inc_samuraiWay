@@ -4,10 +4,9 @@ import {connect} from 'react-redux';
 import {getProfile, getStatus, setUserProfile, updateStatus} from '../../redux/profileReducer';
 import {AppStateRootType} from '../../redux/redux-store';
 import {ProfileType} from '../../redux/state';
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirectComponent} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
-import {Dialogs} from '../Dialogs/Dialogs';
 
 
 type OwnPropsType = MapStatePropsType & DispatchPropsType
@@ -16,7 +15,7 @@ class ProfileContainer extends React.Component <PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;
-        if (!userId) userId = '2'
+        if (!userId) userId = '24024'
         this.props.getProfile(userId)
         this.props.getStatus(userId)
     }

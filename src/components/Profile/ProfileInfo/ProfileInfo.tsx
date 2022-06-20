@@ -14,7 +14,7 @@ export const ProfileInfo = (props: any) => {
                 <img
                     src={props.profile.photos.large || 'https://sun9-40.userapi.com/impg/xpQLmHEXpp2_NoBuiQ5eQ7zXd_Ka7MZxToTO5g/7rzipkNl1Ng.jpg?size=460x604&quality=96&sign=d7a38b815e4dcb25457baba995df2c05&type=album'}
                     alt="profile avatar"/>
-                <ProfileStatus status={'Hello'} updateStatus={props.updateStatus}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )
