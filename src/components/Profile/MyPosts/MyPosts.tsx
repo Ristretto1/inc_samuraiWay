@@ -1,8 +1,7 @@
-import React, {ChangeEvent} from "react";
-import s from "./MyPosts.module.css";
-import {Post} from "./Post/Post";
-import {MyPostsPropsType} from "./MyPostsContainer";
-
+import React, {ChangeEvent} from 'react';
+import s from './MyPosts.module.css';
+import {Post} from './Post/Post';
+import {MyPostsPropsType} from './MyPostsContainer';
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -12,14 +11,15 @@ export const MyPosts = (props: MyPostsPropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
-            props.addPost(props.newPostText);
-        }
+        props.addPost(props.newPostText);
+    }
 
     let onPostChange = () => {
         debugger
         if (newPostElement.current) {
             props.updateNewPostText(newPostElement.current.value);
-    }}
+        }
+    }
 
     return (
         <div className={s.posts__block}>
@@ -28,7 +28,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                 <div>
                     <div>
                         <textarea ref={newPostElement} onChange={onPostChange}
-                                    value={props.newPostText}></textarea>
+                                  value={props.newPostText}></textarea>
                     </div>
                     <div>
                         <button onClick={addPost}>Add post</button>
