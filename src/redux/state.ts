@@ -1,5 +1,5 @@
-import profileReducer, {AddPostActionType, ChangeNewTextActionType} from "./profileReducer";
-import dialogReducer, {ChangeNewMessageActionType, SendMessageActionType} from "./dialogsReducer";
+import {AddPostActionType, ChangeNewTextActionType} from './profileReducer';
+import {ChangeNewMessageActionType, SendMessageActionType} from './dialogsReducer';
 
 /*export let store: StoreType = {
     _appState: {
