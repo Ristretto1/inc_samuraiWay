@@ -1,13 +1,7 @@
-import {ChangeNewMessageActionType, SendMessageActionType} from './dialogsReducer';
-import {strict} from 'assert';
+import {SendMessageActionType} from './dialogsReducer';
 import {ProfileType} from './state';
-import {headerAPI, profileAPI} from '../api/api';
-import {setAuthUserData} from './authReducer';
+import {profileAPI} from '../api/api';
 
-/*export type ProfilePageType = {
-    posts: PostDataType[]
-    newPostText: string
-}*/
 export type PostDataType = {
     id: number
     message: string
@@ -17,7 +11,6 @@ export type PostDataType = {
 export type ActionsType =
     AddPostActionType
     | ChangeNewTextActionType
-    | ChangeNewMessageActionType
     | SendMessageActionType
     | SetUserProfileActionType
     | SetStatusActionType
@@ -88,7 +81,7 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
             }
             return {
                 ...state,
-                posts: [...state.posts, newPost],
+                posts: [newPost, ...state.posts],
                 newPostText: ''
             };
 
@@ -137,7 +130,7 @@ export const updateStatus = (status: string) => {
     return (dispatch: any) => {
         profileAPI.updateStatus(status)
             .then(response => {
-                if(response.data.resultCode === 0) {
+                if (response.data.resultCode === 0) {
                     dispatch(setStatus(status))
                 }
             });

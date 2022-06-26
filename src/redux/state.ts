@@ -1,5 +1,5 @@
-import {AddPostActionType, ChangeNewTextActionType} from './profileReducer';
-import {ChangeNewMessageActionType, SendMessageActionType} from './dialogsReducer';
+import {AddPostActionType,} from './profileReducer';
+import {SendMessageActionType} from './dialogsReducer';
 
 /*export let store: StoreType = {
     _appState: {
@@ -172,7 +172,7 @@ export const ChangeNewMessageActionCreator = (newMessageText: string) => {
         newMessageText: newMessageText
     } as const
 }*/
-type ActionsType = AddPostActionType | ChangeNewTextActionType | ChangeNewMessageActionType | SendMessageActionType
+type ActionsType = AddPostActionType |   SendMessageActionType
 
 
 

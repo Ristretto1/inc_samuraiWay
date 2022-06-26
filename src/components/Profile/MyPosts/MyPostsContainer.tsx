@@ -8,11 +8,10 @@ import {Dispatch} from "redux";
 
 type MapStatePropsType = {
     newPostText: string,
-    posts: PostDataType[]
+    posts: Array<PostDataType>
 
 }
 type mapDispatchToPropsType = {
-    updateNewPostText: (text: string) => void,
     addPost: (text: string) => void
 }
 
@@ -28,9 +27,6 @@ const mapStateToProps = (state: AppStateRootType): MapStatePropsType=> {
 
 const mapDispatchToProps = (dispatch: Dispatch) : mapDispatchToPropsType=> {
     return {
-        updateNewPostText: (text: string) => {
-            dispatch( changeNewText(text))
-        },
         addPost: (text: string) => {
             dispatch(addPost(text))
         }

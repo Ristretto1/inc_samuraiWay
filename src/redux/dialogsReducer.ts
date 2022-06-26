@@ -1,16 +1,15 @@
-import {ActionsType} from "./profileReducer";
+import {ActionsType} from './profileReducer';
 
 export type MessagesPageType = {
     messages: PropsMessageType[]
     dialogs: PropsDialogType[]
-    newMessageBody: string
 }
 
 export type PropsDialogType = {
     id: number
     name: string
 }
-export type PropsMessageType={
+export type PropsMessageType = {
     id?: number
     message: string
 }
@@ -28,48 +27,33 @@ const initialState = {
         {id: 2, message: 'Ha-ha'},
         {id: 3, message: 'Hello'},
         {id: 4, message: 'How is your samurai-way?'}
-    ] as PropsMessageType[],
-    newMessageBody: ''
+    ] as unknown as PropsMessageType[]
 }
 
 export type InitialStateType = typeof initialState
 
-const dialogReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType=> {
+const dialogReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case 'UPDATE-NEW-MESSAGE-TEXT':
-            return  {
-                ...state,
-                newMessageBody: action.newMessageText
-            };
-           /* stateCopy.newMessageBody = action.newMessageText;*/
         case 'SEND-MESSAGE':
             let newMessage: PropsMessageType = {
                 id: new Date().getTime(),
-                message: state.newMessageBody
+                message: action.newMessageBody
             };
             return {
                 ...state,
-                newMessageBody: '',
                 messages: [...state.messages, newMessage]
             };
         default:
-            return  state;
+            return state;
     }
 }
 
-export type ChangeNewMessageActionType = ReturnType<typeof ChangeNewMessageActionCreator>
 export type SendMessageActionType = ReturnType<typeof SendMessageActionCreator>
 
-export const SendMessageActionCreator = () => {
+export const SendMessageActionCreator = (formData: string) => {
     return {
         type: 'SEND-MESSAGE',
-    } as const
-}
-
-export const ChangeNewMessageActionCreator = (newMessageText: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
-        newMessageText: newMessageText
+        newMessageBody: formData
     } as const
 }
 
