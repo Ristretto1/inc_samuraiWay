@@ -1,26 +1,27 @@
-import React from "react";
-import s from "./Post.module.css";
-import {PostDataType} from "../../../../redux/profileReducer";
+import React from 'react';
+import classes from './Post.module.css'
 
+type PostPropsType = {
+    message:string
+    id: number
+    likesCount:number
+}
 
-/*type PostPropsType = {
-    message: string
-    likesCount: number
-}*/
-
-export const Post = (props: PostDataType) => {
+const Post = (props: PostPropsType) => {
     return (
 
-        <div className={s.item}>
-            <img className={s.item__image}
-                src="https://sun9-40.userapi.com/impg/xpQLmHEXpp2_NoBuiQ5eQ7zXd_Ka7MZxToTO5g/7rzipkNl1Ng.jpg?size=460x604&quality=96&sign=d7a38b815e4dcb25457baba995df2c05&type=album"
-                alt="ava"/>
+        <div className={classes.item}>
+            <img
+                src="https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/445x460_0_6a5d57baf3fab914fdfcc2cc563ed893@480x496_0xac120003_4430520541578509619.jpg"
+                alt="s"/>
             {props.message}
-
             <div>
-                <span>like </span>
-                {props.likesCount}
+                <span>Likes: {props.likesCount}</span>
             </div>
+
         </div>
-    )
-}
+
+    );
+};
+
+export default Post;

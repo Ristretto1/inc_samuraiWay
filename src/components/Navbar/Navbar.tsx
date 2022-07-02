@@ -1,31 +1,31 @@
-import React from "react";
-import s from './Navbar.module.css';
-import {NavLink} from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import classes from './Navbar.module.css'
 
-export const Navbar = () => {
+
+const Navbar = () => {
     return (
-    <nav className={s.nav}>
-        <ul className={s.items}>
-            <li className={s.item}>
-                <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
-            </li>
-            <li className={s.item}>
-                <NavLink to="/dialogs" activeClassName={s.active}>Messages</NavLink>
-            </li>
-            <li className={s.item}>
-                <NavLink to="/users" activeClassName={s.active}>Users</NavLink>
-            </li>
-            <li className={s.item}>
-                <NavLink to="/news" activeClassName={s.active}>News</NavLink>
-            </li>
-            <li className={s.item}>
-                <NavLink to="/music" activeClassName={s.active}>Music</NavLink>
-            </li>
-            <li className={s.item}>
-                <NavLink to="settings" activeClassName={s.active}>Settings</NavLink>
-            </li>
+            <nav className={classes.nav}>
+                <div className={classes.item}>
+                    <NavLink to="/profile" activeClassName={classes.active}>Profile</NavLink>
+                </div>
+                <div className={classes.item}>
+                    <NavLink to="/dialogs" activeClassName={classes.active}>Messages</NavLink>
+                </div>
+                <div className={classes.item}>
+                    <NavLink to="/users">Users</NavLink>
+                </div>
+                <div className={classes.item}>
+                    <NavLink to="#">News</NavLink>
+                </div>
+                <div className={classes.item}>
+                    <NavLink to="#">Music</NavLink>
+                </div>
+                <div className={classes.item}>
+                    <NavLink to="#">Settings</NavLink>
+                </div>
+            </nav>
+    );
+};
 
-        </ul>
-    </nav>
-    )
-}
+export default Navbar;

@@ -1,72 +1,110 @@
 import React from 'react';
-import s from './Users.module.css';
-import userIcon from '../../assets/images/user.png';
-import {UsersDataType} from '../../redux/usersReducer';
+import s from "./users.module.css";
+import avatar from "../../assets/img/ava.png";
+import {follow, toggleFollowingProgress, UserDataType} from "../../redux/users-reducer";
 import {NavLink} from 'react-router-dom';
+import axios from "axios";
+import {userAPI} from "../../api/api";
 
-type UsersType = {
-    totalUsersCount: number
-    pageSize: number
-    currentPage: number
-    onPageChanged: (pageNumber: number) => void
-    users: UsersDataType[]
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    followingInProgress: Array<number>
+type UsersPropsType = {
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
+    onPageChangedHandler: (page: number) => void
+    users: Array<UserDataType>
+    isFollowingInProgress:Array<number>
+    follow:(id:number) => void
+    unfollow:(id:number) => void
 }
 
-export const Users = (props: UsersType) => {
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i);
+const Users = (props: UsersPropsType) => {
+    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    const pages = []
+
+    for (let i = 1; i <= pagesCount; i += 1) {
+        pages.push(i)
     }
     return (
         <div>
             <div>
-                {
-                    pages.map(p => {
-                        return (
-                            <span
-                                key={p}
-                                className={props.currentPage === p ? s.selectedPage : ''}
-                                onClick={(e) => props.onPageChanged(p)}>{p}</span>
-                        )
-                    })}
+                {pages.map((p, i) => {
+                    return <span key={i} className={props.currentPage === p ? s.selectedPage : ""}
+                                 onClick={() => props.onPageChangedHandler(p)}>{p}</span>
+                })}
             </div>
             {
                 props.users.map(u => {
-                    return (
-                        <div key={u.id}>
+                    return <div key={u.id}>
                         <span>
                             <div>
-                                <NavLink to={'/profile/' + u.id}>
-                                    <img src={u.photos.small != null ? u.photos.small : userIcon}
-                                         className={s.userPhoto}/>
+                                <NavLink to={'profile/' + u.id}>
+                                       <img src={u.photos.small === null ? avatar : u.photos.small} alt="photo"
+                                            className={s.photo}/>
                                 </NavLink>
+
                             </div>
                             <div>
-                                {u.followed
-                                    ? <button
-                                        disabled={props.followingInProgress.some(id => id === u.id)}
-                                        onClick={() => props.unfollow(u.id)}>Unfollow</button>
-                                    : <button
-                                        disabled={props.followingInProgress.some(id => id === u.id)}
-                                        onClick={() => props.follow(u.id)}>Follow</button>
+                                {
+                                    u.followed ?
+
+                                        <button
+                                            disabled={props.isFollowingInProgress.some(id => id === u.id)}
+                                            onClick={() => {
+                                                props.unfollow(u.id)
+                                                // userAPI.unfollowUser(u.id)
+                                                //     .then(data => {
+                                                //         if (data.resultCode === 0) {
+                                                //             props.unfollow(u.id)
+                                                //         }
+                                                //         props.toggleFollowingProgress(false,u.id)
+                                                //     })
+
+                                            }
+                                            }>Unfollow
+                                        </button>
+                                        :
+                                        <button
+                                            disabled={props.isFollowingInProgress.some(id => id === u.id)}
+                                            onClick={() => {
+
+                                                props.follow(u.id)
+                                                // userAPI.followUser(u.id)
+                                                //     .then(data => {
+                                                //         if (data.resultCode === 0) {
+                                                //             props.follow(u.id)
+                                                //         }
+                                                //         props.toggleFollowingProgress(false,u.id)
+                                                //     })
+                                            }
+                                            }>Follow
+                                        </button>
                                 }
                             </div>
                         </span>
+
+                        <span>
                             <span>
-                                <div>{u.name}</div>
-                                <div>{u.status}</div>
-                        </span>
+                                <div>
+                                    {u.name}
+                                </div>
+                                <div>
+                                    {u.status}
+                                </div>
+                            </span>
                             <span>
-                            <div>{'u.location.country'}</div>
-                            <div>{'u.location.city'}</div>
+                                <div>
+                                    {"u.location.country"}
+                                </div>
+                                <div>
+                                    {"u.location.city"}
+                                </div>
+                            </span>
                         </span>
-                        </div>
-                    )
+                    </div>
                 })
             }
-        </div>)
-}
+        </div>
+    );
+};
+
+export default Users;

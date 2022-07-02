@@ -1,8 +1,15 @@
-import React from "react";
-import s from './../Dialogs.module.css';
-import {PropsMessageType} from "../../../redux/dialogsReducer";
+import React from 'react';
+import classes from "./../Dialogs.module.css"
 
-
-export const Message=(props: PropsMessageType) => {
-    return <div className={s.message}>{props.message}</div>
+type MessagePropsType = {
+    id:number
+    message:string
 }
+
+const Message = (props:MessagePropsType) => {
+    return (
+        <div className={classes.message}>{props.message}</div>
+    )
+}
+
+export default Message;

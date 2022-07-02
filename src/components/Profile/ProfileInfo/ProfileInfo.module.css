@@ -1,6 +1,8 @@
-.main__image img{
-    max-width: 100%;
+.profile__img {
+    width: 100%;
 }
-.description__block{
-    padding: 10px;
+
+.profile__description {
+    margin-bottom: 10px;
+    padding: 0 10px;
 }

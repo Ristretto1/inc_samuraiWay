@@ -1,22 +1,35 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import s from './Header.module.css';
+import {NavLink} from 'react-router-dom';
+import classes from './Header.module.css';
 
-export type HeaderPropsType = {
+
+type HeaderType = {
     isAuth: boolean,
-    email: string,
-    login: string
+    login: string | null,
+    logout:()=>void
 }
 
-export const Header = (props: HeaderPropsType) => {
+const Header = (props:HeaderType) => {
+    const {login,isAuth,logout} = props
     return (
-    <header className={s.header}>
-        <img src="https://i.pinimg.com/originals/2e/d6/46/2ed6463a614f7a4ff5736454ac7290f8.png" alt="logo"/>
-        <div className={s.loginBlock}>
-            {props.isAuth ? props.login :  <NavLink to={'/login'}>Login</NavLink>}
-            {props.isAuth && props.email && props.email }
-        </div>
-    </header>
-)
-}
+        <header className={classes.header}>
+            <img src="https://logos-world.net/wp-content/uploads/2020/12/Lays-Logo.png" alt="photo"/>
+            <div className={classes.loginBlock}>
+                {
+                    isAuth ?
+                    <div>
+                        {login}
+                        <button onClick={logout}>logOut</button>
+                    </div>
+                         :
+                        <NavLink to={"/login"}>
+                            Login
+                        </NavLink>
+                }
 
+            </div>
+        </header>
+    );
+};
+
+export default Header;
