@@ -1,6 +1,5 @@
-import axios from "axios";
-import {profileAPI, userAPI} from "../api/api";
-import {Dispatch} from "redux";
+import {profileAPI, userAPI} from '../api/api';
+import {Dispatch} from 'redux';
 
 const ADD_POST = 'ADD_POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -13,29 +12,29 @@ export type PostsDataType = {
 }
 
 type ProfileContactsType = {
-    "facebook": string | null
-    "website": string | null
-    "vk": string | null
-    "twitter": string | null
-    "instagram": string | null
-    "youtube": string | null
-    "github": string | null
-    "mainLink": string | null
+    'facebook': string | null
+    'website': string | null
+    'vk': string | null
+    'twitter': string | null
+    'instagram': string | null
+    'youtube': string | null
+    'github': string | null
+    'mainLink': string | null
 }
 
 type ProfilePhotoType = {
-    "small": string
-    "large": string
+    'small': string
+    'large': string
 }
 
 export type ProfileType = {
-    "aboutMe": string
-    "contacts": ProfileContactsType
-    "lookingForAJob": boolean
-    "lookingForAJobDescription": string
-    "fullName": string
-    "userId": number
-    "photos": ProfilePhotoType
+    'aboutMe': string
+    'contacts': ProfileContactsType
+    'lookingForAJob': boolean
+    'lookingForAJobDescription': string
+    'fullName': string
+    'userId': number
+    'photos': ProfilePhotoType
 }
 
 export type ProfilePageType = {
@@ -55,7 +54,7 @@ const initialState: ProfilePageType = {
         {id: 2, message: 'YO', likesCount: 33}
     ],
     profile: null,
-    status: ""
+    status: ''
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionsType) => {
@@ -68,11 +67,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
             }
             return {
                 ...state,
-                posts: [newPost,...state.posts ],
+                posts: [newPost, ...state.posts],
                 newPostText: ''
             }
         }
-        case "SET_USER_PROFILE": {
+        case 'SET_USER_PROFILE': {
             return {
                 ...state,
                 profile: action.profile
@@ -82,7 +81,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
         case SET_STATUS: {
             return {
                 ...state,
-                status:action.payload.status
+                status: action.payload.status
             }
         }
 
@@ -90,9 +89,9 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
     return state
 }
 
-export const addPostActionCreator = (newPostText:string) => {
+export const addPostActionCreator = (newPostText: string) => {
     return {
-        type: ADD_POST,newPostText
+        type: ADD_POST, newPostText
     } as const
 }
 
@@ -114,7 +113,6 @@ export const setStatus = (status: string) => {
 }
 
 
-
 export const getUserProfile = (userID: string) => (dispatch: any) => {
     userAPI.getProfile(userID)
         .then(response => {
@@ -129,7 +127,7 @@ export const getStatus = (userID: string) => (dispatch: any) => {
         })
 }
 
-export const updateStatus = (newStatus:string) => (dispatch: Dispatch) => {
+export const updateStatus = (newStatus: string) => (dispatch: Dispatch) => {
     profileAPI.updateStatus(newStatus)
         .then((res) => {
             if (res.data.resultCode === 0) {

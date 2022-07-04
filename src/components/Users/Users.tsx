@@ -1,10 +1,8 @@
 import React from 'react';
-import s from "./users.module.css";
-import avatar from "../../assets/img/ava.png";
-import {follow, toggleFollowingProgress, UserDataType} from "../../redux/users-reducer";
+import s from './users.module.css';
+import avatar from '../../assets/img/ava.png';
+import {UserDataType} from '../../redux/users-reducer';
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
-import {userAPI} from "../../api/api";
 
 type UsersPropsType = {
     totalUsersCount: number,
@@ -12,9 +10,9 @@ type UsersPropsType = {
     currentPage: number,
     onPageChangedHandler: (page: number) => void
     users: Array<UserDataType>
-    isFollowingInProgress:Array<number>
-    follow:(id:number) => void
-    unfollow:(id:number) => void
+    isFollowingInProgress: Array<number>
+    follow: (id: number) => void
+    unfollow: (id: number) => void
 }
 
 const Users = (props: UsersPropsType) => {
@@ -28,7 +26,7 @@ const Users = (props: UsersPropsType) => {
         <div>
             <div>
                 {pages.map((p, i) => {
-                    return <span key={i} className={props.currentPage === p ? s.selectedPage : ""}
+                    return <span key={i} className={props.currentPage === p ? s.selectedPage : ''}
                                  onClick={() => props.onPageChangedHandler(p)}>{p}</span>
                 })}
             </div>
@@ -93,10 +91,10 @@ const Users = (props: UsersPropsType) => {
                             </span>
                             <span>
                                 <div>
-                                    {"u.location.country"}
+                                    {'u.location.country'}
                                 </div>
                                 <div>
-                                    {"u.location.city"}
+                                    {'u.location.city'}
                                 </div>
                             </span>
                         </span>
