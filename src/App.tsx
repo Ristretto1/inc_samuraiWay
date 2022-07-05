@@ -8,16 +8,19 @@ import HeaderContainer from './components/Header/HeaderConteiner';
 import Login from './components/login/login';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import {connect} from 'react-redux';
-import {compose} from 'redux';
 import {initializeApp} from './redux/app-reducer';
-import {initialize} from 'redux-form';
 import {AppStateType} from './redux/redux-store';
 import {Preloader} from './components/common/Preloader/Preloader';
 
-type AppPropsType = {
-    initializeApp: () => void
-    initialized: boolean
+type MapStatePropsType = {
+    initialized: boolean,
 }
+
+type MapDispatchToPropsType = {
+    initializeApp: () => void
+}
+
+export type AppPropsType = MapStatePropsType & MapDispatchToPropsType
 
 class App extends React.Component<AppPropsType> {
 
@@ -48,11 +51,10 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType): MapStatePropsType => (
     {
         initialized: state.app.initialized
     }
-}
+)
 
-export default compose(
-    connect(mapStateToProps, {initializeApp})(App));
+export default connect(mapStateToProps, {initializeApp})(App);
