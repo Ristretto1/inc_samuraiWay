@@ -1,41 +1,43 @@
 import axios from 'axios';
 
+
 const instance = axios.create({
     withCredentials: true,
-    baseURL: `https://social-network.samuraijs.com/api/1.0/`,
+    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
         'API-KEY': 'ac422c12-b2f2-4703-8702-4c62b2f04639'
     }
-})
+});
 
-export const userAPI = {
-    getUsers(currentPage: number, pageSize: number = 1) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => response.data)
+export const usersAPI = {
+    getUsers(currentPage: number, pageSize: number) {
+        return instance.get(`users?page =${currentPage}&count =${pageSize}`)
+            .then(response => {
+                return response.data
+            })
     },
-    unfollowUser(id: number) {
-        return instance.delete(`follow/${id}`)
-            .then(response => response.data)
+    follow(userId: number) {
+        return instance.post(`follow/${userId}`
+        )
     },
-    followUser(id: number) {
-        return instance.post(`follow/${id}`, {})
-            .then(response => response.data)
+    unfollow(userId: number) {
+        return instance.delete(`follow/${userId}`)
     },
-    getProfile(userID: string) {
-        console.warn('Obsolete method. Please profile API object')
-        return profileAPI.getProfile(userID)
+    getProfile(userId: string) {
+        console.log('Obsolete method. Please use profileAPI object')
+        return profileAPI.getProfile(userId)
     }
 }
 
 export const profileAPI = {
-    getProfile(userID: string) {
-        return instance.get(`profile/` + userID)
+    getProfile(userId: string) {
+        return instance.get(`profile/` + userId)
     },
-    getStatus(userID: string) {
-        return instance.get(`profile/status/` + userID)
+    getStatus(userId: string) {
+        return instance.get(`profile/status/` + userId)
     },
     updateStatus(status: string) {
-        return instance.put<updateStatusType>(`profile/status/`, {status})
+        return instance.put(`profile/status/`, {status: status})
     }
 }
 
@@ -43,16 +45,11 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`)
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post('auth/login', {email, password, rememberMe})
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
     },
     logout() {
-        return instance.delete('auth/login')
+        return instance.delete(`auth/login`)
     }
 }
 
-type updateStatusType = {
-    resultCode: number
-    messages: string[]
-    data: {}
-}

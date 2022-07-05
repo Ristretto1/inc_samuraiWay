@@ -1,15 +1,18 @@
 import React from 'react';
-import classes from "./../Dialogs.module.css"
+import s from './Message.module.css'
 
-type MessagePropsType = {
-    id:number
-    message:string
+export type MessageType = {
+    id: string
+    message: string
 }
 
-const Message = (props:MessagePropsType) => {
+const Message = (props: MessageType) => {
     return (
-        <div className={classes.message}>{props.message}</div>
+        <div className={s.message}>
+            {props.message}
+        </div>
     )
 }
+
 
 export default Message;

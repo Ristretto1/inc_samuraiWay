@@ -1,42 +1,43 @@
-import React, {ChangeEvent} from 'react';
-import classes from "./Dialogs.module.css"
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
-import { DialogsPropsType } from './DialogsContainer';
-import {Redirect} from "react-router-dom";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import { Textarea } from '../common/FormsControl/FormsControls';
-import {MaxLengthCreator, required} from "../../utils/validators/validators";
-import { AddMessageReduxForm, FormDataType } from './AddMessageForm/AddMessageForm';
+import React from 'react';
+import s from './Dialogs.module.css'
+import DialogItem, {DialogsType} from './DialogItem/DialogItem';
+import Message, {MessageType} from './Message/Message';
+import {Redirect} from 'react-router-dom';
+import {AddMessageFormRedux} from './AddMessageForm/AddMessageForm';
 
+type DialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessageType>
+    newMessageBody: string
+    sendMessage: (values: string) => void
+    isAuth: boolean
+}
 
+const Dialogs = (props: DialogsPageType) => {
 
+    let dialogsElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id} avatar={d.avatar}/>);
 
+    let messagesElements = props.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>);
 
-const Dialogs = (props:DialogsPropsType) => {
-
-    const state = props.dialogsPage
-    let dialogsElement = state.dialogs.map((d,i) => <DialogItem key={i} name={d.name} id={d.id}/>)
-    let messageElements = state.messages.map((m,i) => <Message key={i} id={m.id} message={m.message}/>)
-
-
-    const AddNewMessageHandler = (value:FormDataType) => {
-        props.sendMessageCreator(value.newMessageBody)
+    let addNewMessage = (values: { newMessageBody: string }) => {
+        props.sendMessage(values.newMessageBody);
+        values.newMessageBody = '';
     }
-    return (
-        <div className={classes.dialogs}>
-            <div className={classes.dialogsItem}>
-                {dialogsElement}
-            </div>
-            <div className={classes.messages}>
-                <div>
-                    {messageElements}
-                </div>
-                <AddMessageReduxForm onSubmit={AddNewMessageHandler}/>
-            </div>
 
+    if (!props.isAuth) return <Redirect to={'/login'}/>;
+
+    return (
+        <div className={s.dialogs}>
+            <div className={s.dialogsItems}>
+                {dialogsElements}
+            </div>
+            <div className={s.messages}>
+                <div>{messagesElements}</div>
+                <AddMessageFormRedux onSubmit={addNewMessage}/>
+            </div>
         </div>
     );
 };
+
 
 export default Dialogs;

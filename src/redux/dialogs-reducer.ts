@@ -1,55 +1,49 @@
-const SEND_MESSAGE = 'SEND_MESSAGE'
+import {ActionsTypes} from './redux-store';
+import {DialogsType} from '../components/Dialogs/DialogItem/DialogItem';
+import {MessageType} from '../components/Dialogs/Message/Message';
+import {v1} from "uuid";
 
-export type DialogsPageType = {
-    messages: Array<MessageDataType>
-    dialogs: Array<DialogsDataType>
-}
-
-type DialogsDataType = {
-    id: number
-    name: string
-}
-
-type MessageDataType = {
-    id: number
-    message: string
-}
-
-export type DialogsActionsType =
-     ReturnType<typeof sendMessageCreator>
-
-const initialState:DialogsPageType = {
-    messages: [
-        {id: 1, message: 'Hello'},
-        {id: 2, message: 'YO'},
-        {id: 3, message: 'mda'}
-
-    ],
+let initialState = {
     dialogs: [
         {id: 1, name: 'Dimych'},
-        {id: 2, name: 'Sveta'},
-        {id: 3, name: 'Sasha'},
-        {id: 4, name: 'Victor'},
-        {id: 5, name: 'Andrey'},
-    ],
+        {id: 2, name: 'Andrew'},
+        {id: 3, name: 'Sveta'},
+        {id: 4, name: 'Sasha'},
+        {id: 5, name: 'Viktor'},
+        {id: 6, name: 'Valera'}
+    ] as Array<DialogsType>,
+    messages: [
+        {id: v1(), message: 'Hi'},
+        {id: v1(), message: 'How is your it-kamasutra?'},
+        {id: v1(), message: 'Yo'},
+        {id: v1(), message: 'Yo'},
+        {id: v1(), message: 'Yo'}
+    ] as Array<MessageType>
 }
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsActionsType): DialogsPageType => {
+export type InitialStateType = typeof initialState
+
+const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+
     switch (action.type) {
-        case SEND_MESSAGE:
-            const body = action.newMessage
+        case 'SEND-MESSAGE':
+            let body = action.newMessageBody;
             return {
                 ...state,
-                messages: [...state.messages, {id: 4, message: body}]
-            }
+                messages: [...state.messages, {id: v1(), message: body}]
+            };
+        default:
+            return state;
     }
-    return state
 }
 
+export type ActionsDialogsTypes = ReturnType<typeof sendMessageAC>
 
-export const sendMessageCreator = (newMessage:string) => {
+export const sendMessageAC = (newMessageBody: string) => {
     return {
-        type: SEND_MESSAGE,
-        newMessage
+        type: 'SEND-MESSAGE',
+        newMessageBody
     } as const
 }
+
+export default dialogsReducer;

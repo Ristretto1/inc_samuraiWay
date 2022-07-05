@@ -1,8 +1,6 @@
-.profile__img {
-    width: 100%;
+.descriptionBlock {
+padding: 10px;
 }
-
-.profile__description {
-    margin-bottom: 10px;
-    padding: 0 10px;
+.profileImg img {
+    width: 100%;
 }

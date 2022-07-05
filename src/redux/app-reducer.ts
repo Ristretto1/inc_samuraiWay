@@ -1,65 +1,40 @@
-import {AppThunk} from './redux-store';
+import {ActionsTypes} from './redux-store';
+import {ThunkDispatchType, ThunkType} from './users-reducer';
 import {getAuthUserData} from './auth-reducer';
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
 
-type AppStateType = {
-    initialized: boolean,
-}
-
-const initialState: AppStateType = {
+let initialState: appType = {
     initialized: false,
 }
 
-export const appReducer = (state: AppStateType = initialState, action: AppActionType): AppStateType => {
-    switch (action.type) {
-        case 'INITIALIZED_SUCCESS': {
-            return {...state, initialized: true}
-        }
+export type appType = {
+    initialized: boolean,
+}
 
-        default: {
-            return state
-        }
+const appReducer = (state: appType = initialState, action: ActionsTypes): appType => {
+    switch (action.type) {
+        case INITIALIZED_SUCCESS:
+            return {
+                ...state,
+                initialized: true
+            }
+        default:
+            return state;
     }
 }
 
-export type setInitializedType = ReturnType<typeof initializedSuccess>
-export type AppActionType = setInitializedType
+export type ActionsAppTypes = ReturnType<typeof initializedSuccess>
 
+export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS}) as const
 
-export const initializedSuccess = () => {
-    return {
-        type: INITIALIZED_SUCCESS,
-    } as const
-}
-
-export const initializeApp = (): AppThunk => async (dispatch) => {
-    await dispatch(getAuthUserData)
-    dispatch(initializedSuccess)
-
+export const initializeApp = (): ThunkType => (dispatch: ThunkDispatchType) => {
+    let promise = dispatch(getAuthUserData());
+    Promise.all([promise])
+        .then(() => {
+            dispatch(initializedSuccess());
+        });
 
 }
 
-// export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch: any) => {
-//
-//     authAPI.login(email, password, rememberMe)
-//         .then(response => {
-//             debugger
-//             if (response.data.resultCode === 0) {
-//                 dispatch(getAuthUserData())
-//             } else {
-//                 let message = response.data.messages > 0 ? response.data.messages[0] : 'some error'
-//                 dispatch(stopSubmit('login', {_error: message}))
-//             }
-//         })
-//         .catch(err => console.log(err))
-// }
-//
-// export const logout = (): AppThunk => (dispatch) => {
-//     authAPI.logout()
-//         .then(response => {
-//             if (response.data.resultCode === 0) {
-//                 dispatch(setAuthUserData(null, null, null, false))
-//             }
-//         })
-// }
+export default appReducer;

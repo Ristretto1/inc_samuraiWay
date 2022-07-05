@@ -1,27 +1,24 @@
 import React from 'react';
-import classes from './Post.module.css'
+import s from './Post.module.css';
 
-type PostPropsType = {
-    message:string
+export type PostsType = {
     id: number
-    likesCount:number
+    message: string
+    likesCount: number
 }
 
-const Post = (props: PostPropsType) => {
+const Post = (props: PostsType) => {
+
     return (
-
-        <div className={classes.item}>
-            <img
-                src="https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/445x460_0_6a5d57baf3fab914fdfcc2cc563ed893@480x496_0xac120003_4430520541578509619.jpg"
-                alt="s"/>
-            {props.message}
-            <div>
-                <span>Likes: {props.likesCount}</span>
+            <div className={s.item}>
+                <img
+                    src={'http://beloweb.ru/wp-content/uploads/2014/03/Artists-Series-Thomas-Hawk-1.jpeg'} alt={'ava'}/>
+                { props.message }
+                <div>
+                    <span>like</span> { props.likesCount }
+                </div>
             </div>
-
-        </div>
-
     );
-};
+}
 
 export default Post;

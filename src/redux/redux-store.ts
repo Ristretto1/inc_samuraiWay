@@ -1,40 +1,35 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import {ProfileActionsType, profileReducer} from './profile-reducer';
-import {DialogsActionsType, dialogsReducer} from './dialogs-reducer';
-import {UsersActionType, usersReducer} from './users-reducer';
-import {AuthActionType, authReducer} from './auth-reducer';
-import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
+import profileReducer, {ActionsProfileTypes} from './profile-reducer';
+import dialogsReducer, {ActionsDialogsTypes} from './dialogs-reducer';
+import sidebarReducer from './sidebar-reducer';
+import usersReducer, {ActionsUsersTypes} from './users-reducer';
+import authReducer, {ActionsAuthTypes} from './auth-reducer';
+import thunkMiddleWare from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
-import {appReducer} from './app-reducer';
+import appReducer, {ActionsAppTypes} from './app-reducer';
 
-const reducers = combineReducers({
+export type ActionsTypes =
+    ActionsProfileTypes
+    | ActionsDialogsTypes
+    | ActionsUsersTypes
+    | ActionsAuthTypes
+    | ActionsAppTypes
+
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
+    sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer,
     app: appReducer
-})
+});
 
+export type RootStateType = ReturnType<typeof rootReducer>
+let store = createStore(rootReducer, applyMiddleware(thunkMiddleWare));
 
-export const store = createStore(reducers, applyMiddleware(thunkMiddleware))
-
-
-//определить автоматически тип объекта store
-export type ReduxStoreType = typeof store
-
-//определить тип объекта состояния
-export type AppStateType = ReturnType<typeof reducers>
-
-export type AppActionsType = AuthActionType |
-    DialogsActionsType |
-    ProfileActionsType |
-    UsersActionType
-
-export type AppDispatch = ThunkDispatch<AppStateType, unknown, AppActionsType>
-
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AppActionsType>
-
-//стучимся до стора с любого места
+export type StoreType = typeof store
 // @ts-ignore
-window.store = store
+window.store = store;
+
+export default store;
